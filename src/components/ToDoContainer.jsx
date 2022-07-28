@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import ToDoTasks from "./ToDoTasks";
 
 const ToDoContainer = () => {
+  const ref = useRef(null);
   const [list, setList] = useState([]);
   const [tasks, setTasks] = useState("");
 
@@ -9,9 +11,11 @@ const ToDoContainer = () => {
   };
 
   const addTask = (e) => {
+    e.preventDefault();
     if (tasks.length === 0) return null;
     const newToDoList = [...list, tasks];
     setList(newToDoList);
+    ref.current.value = "";
   };
 
   const handleRemove = (taskName) => {
@@ -22,19 +26,17 @@ const ToDoContainer = () => {
     <div className="todocontainer">
       <h2>¿Qué haremos hoy?</h2>
       <div className="container">
-        <input type="text" onChange={handleChange} placeholder="Ingrese su tarea..." />
+        <input
+          type="text"
+          onChange={handleChange}
+          placeholder="Ingrese su tarea..."
+          ref={ref}
+        />
         <button className="addButton" onClick={addTask}>
           Add
         </button>
       </div>
-      <div>
-        {list.map((el, i) => (
-          <div className="tareas" key={el}>
-            <p>{el}</p>
-            <button onClick={() => handleRemove(el)}> X </button>
-          </div>
-        ))}
-      </div>
+      <ToDoTasks handleRemove={handleRemove} list={list} setList={setList} />
     </div>
   );
 };
