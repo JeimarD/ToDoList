@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import ToDoTasks from "./ToDoTasks";
+import { v4 as uuidv4 } from "uuid";
 
 const ToDoContainer = () => {
   const ref = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [list, setList] = useState([]);
   const [tasks, setTasks] = useState("");
+  const [list, setList] = useState([]);
+  const [selectedTask, setSelectedTask] = useState("");
 
   const handleChange = (e) => {
     setTasks(e.target.value);
@@ -14,18 +16,21 @@ const ToDoContainer = () => {
   const addTask = (e) => {
     e.preventDefault();
     if (tasks.length === 0) return null;
-    const newTask = { tarea: tasks };
+    let num = 0;
+    const newTask = { tarea: tasks, id: uuidv4() };
     setList([...list, newTask]);
     setTasks("");
     ref.current.value = "";
+    ref.current.focus();
   };
 
   const handleRemove = (taskName) => {
-    setList(list.filter((task) => task !== taskName));
+    setList(list.filter((task) => task.tarea !== taskName));
   };
 
-  const handleEdit = () => {
+  const handleEdit = (el, i) => {
     setIsEditing(true);
+    setSelectedTask(i);
   };
 
   const editTask = (task) => {
@@ -33,13 +38,14 @@ const ToDoContainer = () => {
       if (task === el.tarea) {
         return {
           ...el,
-          tarea: "hola",
+          tarea: tasks,
         };
       }
       return el;
     });
     setList(updatedTask);
     setIsEditing(false);
+    setTasks("");
   };
 
   return (
@@ -50,6 +56,7 @@ const ToDoContainer = () => {
           type="text"
           onChange={handleChange}
           placeholder="Ingrese su tarea..."
+          autoFocus
           ref={ref}
         />
         <button className="addButton" onClick={addTask}>
@@ -62,6 +69,8 @@ const ToDoContainer = () => {
         handleEdit={handleEdit}
         isEditing={isEditing}
         editTask={editTask}
+        handleChange={handleChange}
+        selectedTask={selectedTask}
       />
     </div>
   );

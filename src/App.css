@@ -68,3 +68,16 @@
 .acciones > * {
   cursor: pointer;
 }
+
+.editTask {
+  background-color: #009cad;
+  outline: none;
+  border: none;
+  color: #fff;
+  padding: 1rem;
+  width: 30rem;
+}
+
+.editTask::placeholder {
+  color: rgb(221, 221, 221)
+}
