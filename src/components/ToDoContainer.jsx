@@ -2,13 +2,14 @@ import React, { useRef, useState } from "react";
 import ToDoCompleted from "./ToDoCompleted";
 import ToDoTasks from "./ToDoTasks";
 import { v4 as uuidv4 } from "uuid";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const ToDoContainer = () => {
   const ref = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
   const [tasks, setTasks] = useState("");
-  const [list, setList] = useState([]);
-  const [checked, setChecked] = useState([]);
+  const [list, setList] = useLocalStorage("list", []);
+  const [checked, setChecked] = useLocalStorage("checked", []);
   const [selectedTask, setSelectedTask] = useState("");
   const [section, setSection] = useState(true);
 
@@ -31,7 +32,6 @@ const ToDoContainer = () => {
   };
 
   const handleRemoveChecked = (taskDeleted) => {
-    console.log(taskDeleted);
     setChecked(checked.filter((el) => el.tarea !== taskDeleted));
   };
 
@@ -64,7 +64,6 @@ const ToDoContainer = () => {
   };
 
   const handleCheck = (el) => {
-    console.log(el);
     const newChecked = { tarea: el, id: uuidv4() };
     setChecked([...checked, newChecked]);
     setList(list.filter((task) => task.tarea !== el));
@@ -86,12 +85,25 @@ const ToDoContainer = () => {
         </button>
       </div>
       <div className="toDoOptions">
-        <button id="tareasp" onClick={handleSection}>
-          Tareas Pendientes
-        </button>
-        <button id="tareasc" onClick={handleSection}>
-          Tareas Completadas
-        </button>
+        {section ? (
+          <>
+            <button id="tareasp-act" onClick={handleSection}>
+              Tareas Pendientes
+            </button>
+            <button id="tareasc" onClick={handleSection}>
+              Tareas Completadas
+            </button>
+          </>
+        ) : (
+          <>
+            <button id="tareasp" onClick={handleSection}>
+              Tareas Pendientes
+            </button>
+            <button id="tareasc-act" onClick={handleSection}>
+              Tareas Completadas
+            </button>
+          </>
+        )}
       </div>
       {section ? (
         <ToDoTasks

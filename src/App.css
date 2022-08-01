@@ -33,6 +33,10 @@
   width: 8rem;
 }
 
+.container .addButton:hover {
+  cursor: pointer;
+}
+
 .container > input {
   background: linear-gradient(
     to bottom,
@@ -89,7 +93,7 @@
 }
 
 .toDoOptions > * {
-  background: linear-gradient(to bottom, #0d09ff, #23e50000);
+  background: linear-gradient(to bottom, #005087, rgb(55 0 255));
   outline: none;
   border: none;
   padding: 1em 2em 1em 2em;
@@ -99,4 +103,12 @@
 
 .toDoOptions > *:hover {
   cursor: pointer;
+}
+
+#tareasp-act {
+  background: linear-gradient(to bottom, #23a3fb, #121ff9);
+}
+
+#tareasc-act {
+  background: linear-gradient(to bottom, #23a3fb, #121ff9);
 }
