@@ -61,7 +61,7 @@
 .acciones {
   font-size: 1.5em;
   display: flex;
-  width: 3em;
+  width: 5em;
   justify-content: space-around;
 }
 
@@ -79,5 +79,24 @@
 }
 
 .editTask::placeholder {
-  color: rgb(221, 221, 221)
+  color: rgb(221, 221, 221);
+}
+
+.toDoOptions {
+  display: flex;
+  width: 28em;
+  justify-content: space-evenly;
+}
+
+.toDoOptions > * {
+  background: linear-gradient(to bottom, #0d09ff, #23e50000);
+  outline: none;
+  border: none;
+  padding: 1em 2em 1em 2em;
+  color: white;
+  border-radius: 4px;
+}
+
+.toDoOptions > *:hover {
+  cursor: pointer;
 }

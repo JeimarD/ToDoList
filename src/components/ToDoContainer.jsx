@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import ToDoCompleted from "./ToDoCompleted";
 import ToDoTasks from "./ToDoTasks";
 import { v4 as uuidv4 } from "uuid";
 
@@ -7,7 +8,9 @@ const ToDoContainer = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [tasks, setTasks] = useState("");
   const [list, setList] = useState([]);
+  const [checked, setChecked] = useState([]);
   const [selectedTask, setSelectedTask] = useState("");
+  const [section, setSection] = useState(true);
 
   const handleChange = (e) => {
     setTasks(e.target.value);
@@ -16,7 +19,6 @@ const ToDoContainer = () => {
   const addTask = (e) => {
     e.preventDefault();
     if (tasks.length === 0) return null;
-    let num = 0;
     const newTask = { tarea: tasks, id: uuidv4() };
     setList([...list, newTask]);
     setTasks("");
@@ -26,6 +28,11 @@ const ToDoContainer = () => {
 
   const handleRemove = (taskName) => {
     setList(list.filter((task) => task.tarea !== taskName));
+  };
+
+  const handleRemoveChecked = (taskDeleted) => {
+    console.log(taskDeleted);
+    setChecked(checked.filter((el) => el.tarea !== taskDeleted));
   };
 
   const handleEdit = (el, i) => {
@@ -48,6 +55,21 @@ const ToDoContainer = () => {
     setTasks("");
   };
 
+  const handleSection = (e) => {
+    if (e.target.id === "tareasp") {
+      setSection(true);
+    } else if (e.target.id === "tareasc") {
+      setSection(false);
+    }
+  };
+
+  const handleCheck = (el) => {
+    console.log(el);
+    const newChecked = { tarea: el, id: uuidv4() };
+    setChecked([...checked, newChecked]);
+    setList(list.filter((task) => task.tarea !== el));
+  };
+
   return (
     <div className="todocontainer">
       <h2>¿Qué haremos hoy?</h2>
@@ -63,15 +85,31 @@ const ToDoContainer = () => {
           Add
         </button>
       </div>
-      <ToDoTasks
-        handleRemove={handleRemove}
-        list={list}
-        handleEdit={handleEdit}
-        isEditing={isEditing}
-        editTask={editTask}
-        handleChange={handleChange}
-        selectedTask={selectedTask}
-      />
+      <div className="toDoOptions">
+        <button id="tareasp" onClick={handleSection}>
+          Tareas Pendientes
+        </button>
+        <button id="tareasc" onClick={handleSection}>
+          Tareas Completadas
+        </button>
+      </div>
+      {section ? (
+        <ToDoTasks
+          handleRemove={handleRemove}
+          list={list}
+          handleEdit={handleEdit}
+          isEditing={isEditing}
+          editTask={editTask}
+          handleChange={handleChange}
+          selectedTask={selectedTask}
+          handleCheck={handleCheck}
+        />
+      ) : (
+        <ToDoCompleted
+          checked={checked}
+          handleRemoveChecked={handleRemoveChecked}
+        />
+      )}
     </div>
   );
 };
