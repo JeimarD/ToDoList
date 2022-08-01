@@ -28,11 +28,11 @@ const ToDoContainer = () => {
   };
 
   const handleRemove = (taskName) => {
-    setList(list.filter((task) => task.tarea !== taskName));
+    setList(list.filter((task) => task.id !== taskName));
   };
 
   const handleRemoveChecked = (taskDeleted) => {
-    setChecked(checked.filter((el) => el.tarea !== taskDeleted));
+    setChecked(checked.filter((el) => el.id !== taskDeleted));
   };
 
   const handleEdit = (el, i) => {
@@ -64,9 +64,9 @@ const ToDoContainer = () => {
   };
 
   const handleCheck = (el) => {
-    const newChecked = { tarea: el, id: uuidv4() };
+    const newChecked = { tarea: el.tarea, id: uuidv4() };
     setChecked([...checked, newChecked]);
-    setList(list.filter((task) => task.tarea !== el));
+    setList(list.filter((task) => task.id !== el.id));
   };
 
   return (

@@ -39,14 +39,14 @@ const ToDoTasks = ({
             <div className="tareas" key={el.id}>
               <p>{el.tarea}</p>
               <div className="acciones">
-                <AiOutlineCheck onClick={() => handleCheck(el.tarea)} />
+                <AiOutlineCheck onClick={() => handleCheck(el)} />
                 <AiOutlineEdit
                   id="editar"
                   onClick={() => handleEdit(el.tarea, i)}
                 />
                 <AiOutlineDelete
                   id="eliminar"
-                  onClick={() => handleRemove(el.tarea)}
+                  onClick={() => handleRemove(el.id)}
                 />
               </div>
             </div>

@@ -10,7 +10,7 @@ const ToDoCompleted = ({ checked, handleRemoveChecked }) => {
           <div className="acciones">
             <AiOutlineDelete
               id="eliminar"
-              onClick={() => handleRemoveChecked(el.tarea)}
+              onClick={() => handleRemoveChecked(el.id)}
             />
           </div>
         </div>
