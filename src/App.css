@@ -3,7 +3,6 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  margin: 5rem 10rem 5rem 10rem;
   border-radius: 15px;
   background: linear-gradient(
     to bottom,
@@ -11,6 +10,7 @@
     rgba(14, 16, 25, 255)
   );
   min-height: 70vh;
+  margin: 7% 14%;
   height: fit-content;
 }
 
@@ -22,6 +22,7 @@
   display: flex;
   border: 2px solid rgb(0, 4, 255);
   margin-bottom: 1.4em;
+  width: 50%;
 }
 
 .container .addButton {
@@ -30,7 +31,7 @@
   border: none;
   border-radius: 3px;
   padding: 1em;
-  width: 8rem;
+  width: 46%;
 }
 
 .container .addButton:hover {
@@ -47,7 +48,7 @@
   border: none;
   color: #fff;
   padding: 1rem;
-  width: 16rem;
+  width: 100%;
 }
 
 .tareas {
@@ -88,15 +89,16 @@
 
 .toDoOptions {
   display: flex;
-  width: 28em;
   justify-content: space-evenly;
+  width: 55%;
+  margin-bottom: 0.5%;
 }
 
 .toDoOptions > * {
   background: linear-gradient(to bottom, #005087, rgb(55 0 255));
   outline: none;
   border: none;
-  padding: 1em 2em 1em 2em;
+  padding: 1em 2em;
   color: white;
   border-radius: 4px;
 }
@@ -111,4 +113,24 @@
 
 #tareasc-act {
   background: linear-gradient(to bottom, #23a3fb, #121ff9);
+}
+
+@media only screen and (max-width: 875px) {
+
+  .todocontainer {
+    margin: 7% 2%;
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  .toDoOptions {
+    margin-bottom: 3%;
+    width: 100%;
+  }
+
+  .toDoOptions > * {
+    padding: 4% 4%;
+  }
 }

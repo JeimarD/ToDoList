@@ -13,5 +13,6 @@ code {
 }
 
 html {
-  background: linear-gradient(to right, rgb(0, 238, 255), rgb(55, 0, 255))
+  background: linear-gradient(to right, rgb(0, 238, 255), rgb(55, 0, 255));
+  overflow-x: hidden;
 }
