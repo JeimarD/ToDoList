@@ -25,10 +25,7 @@ const ToDoTasks = ({
                 placeholder={el.tarea}
               />
               <div className="acciones">
-                <AiOutlineCheck
-                  id="editar"
-                  onClick={() => editTask(el.tarea)}
-                />
+                <AiOutlineCheck id="editar" onClick={() => editTask(el)} />
               </div>
             </div>
           ))}

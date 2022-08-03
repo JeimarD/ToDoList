@@ -42,14 +42,23 @@ const ToDoContainer = () => {
 
   const editTask = (task) => {
     const updatedTask = list.map((el) => {
-      if (task === el.tarea) {
-        return {
-          ...el,
-          tarea: tasks,
-        };
+      if (task.id === el.id) {
+        if (tasks.length === 0) {
+          return {
+            ...el,
+            tarea: task.tarea,
+          };
+        } else {
+          return {
+            ...el,
+            tarea: tasks,
+          };
+        }
       }
+
       return el;
     });
+
     setList(updatedTask);
     setIsEditing(false);
     setTasks("");
